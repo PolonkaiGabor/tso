@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\beadando_szoftech.props" />
+</Project>
