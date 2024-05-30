@@ -21,33 +21,14 @@ namespace beadando_szoftech.Controllers
         public async Task<List<House>> Get()
         {
             var housesDB = await _houseService.GetAsync();
-            /*
-            List<House> housesList = new List<House>();
-            foreach (var houseItem in housesDB)
-            {
-                House house = new House();
-                house.id = houseItem.id;
-                house.date_added = houseItem.date_added;
-                house.date_sold = houseItem.date_sold;
-                house.boughtBy = houseItem.boughtBy;
-                house.price = houseItem.price;
-                house.size = houseItem.size;
-                house.county = houseItem.county;
-                house.city = houseItem.city;
-                house.address = houseItem.address;
-                house.addedBy = houseItem.addedBy;
 
-
-                housesList.Add(house);
-            }
-            */
-            return housesDB; //housesList
+            return housesDB;
         }
 
 
         //Ház lekérése id alapján
-        [HttpGet("GetHouseByID{id:length(24)}")]
-        public async Task<ActionResult<House>> Get(string id)
+        [HttpGet("GetHouseByID{id}")]
+        public async Task<ActionResult<House>> Get(int id)
         {
             var houseDB = await _houseService.GetAsync(id);
 
@@ -56,25 +37,11 @@ namespace beadando_szoftech.Controllers
                 return NotFound();
             }
 
-            /*
-            House houseItem = new House();
-            houseItem.id = houseDB.id;
-            houseItem.date_added = houseDB.date_added;
-            houseItem.date_sold = houseDB.date_sold;
-            houseItem.boughtBy = houseDB.boughtBy;
-            houseItem.price = houseDB.price;
-            houseItem.size = houseDB.size;
-            houseItem.county = houseDB.county;
-            houseItem.city = houseDB.city;
-            houseItem.address = houseDB.address;
-            houseItem.addedBy = houseDB.addedBy;
-
-            */
-            return houseDB; // houseItem
+            return houseDB; 
         }
         
         //Ház létrehozása
-        [HttpPost]
+        [HttpPost("HouseAdd")]
         public async Task<ActionResult<User>> CreateHouse(House NewHouse)
         {
             House houseDB = new House();
@@ -94,8 +61,8 @@ namespace beadando_szoftech.Controllers
         }
 
         //Megváltoztatja a ház adatait 
-        [HttpPatch("Update{id:length(24)}")]
-        public async Task<ActionResult<string>> UpdateHouse(string id, House updatedHouse)
+        [HttpPatch("Update{id}")]
+        public async Task<ActionResult<string>> UpdateHouse(int id, House updatedHouse)
         {
             var houseDB = await _houseService.GetAsync(id);
 
@@ -120,8 +87,8 @@ namespace beadando_szoftech.Controllers
             return Ok("Sikeres módosítás!"); //NoContent()
         }
 
-        [HttpDelete("Delete{id:length(24)}")]
-        public async Task<ActionResult<string>> Delete(string id)
+        [HttpDelete("Delete{id}")]
+        public async Task<ActionResult<string>> Delete(int id)
         {
             var user = await _houseService.GetAsync(id);
 

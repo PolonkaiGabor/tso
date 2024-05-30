@@ -7,8 +7,7 @@ namespace beadando_szoftech.Models
     public class House
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string? id { get; set; }
+        public int id { get; set; }
 
         public string? date_added { get; set; } = null!;
 
